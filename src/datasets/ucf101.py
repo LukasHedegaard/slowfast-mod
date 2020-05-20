@@ -1,10 +1,11 @@
-from pathlib import Path
-import shutil
 import re
-from tqdm.auto import tqdm
-from typing import Union
-from src.utils.download import download_and_extract_archive
+import shutil
 from argparse import ArgumentParser
+from pathlib import Path
+from typing import Union
+from tqdm.auto import tqdm
+
+from src.utils.download import download_and_extract_archive
 
 # from torch.utils.data import random_split
 # from torchvision.datasets import UCF101, VisionDataset

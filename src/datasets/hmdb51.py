@@ -1,13 +1,14 @@
+from argparse import ArgumentParser
 from functools import partial
 from multiprocessing import Pool
+from pathlib import Path
 from typing import Union
+
 from src.utils.download import (
     download_and_extract_archive,
     download_url,
     extract_archive,
 )
-from pathlib import Path
-from argparse import ArgumentParser
 
 # import warnings
 
