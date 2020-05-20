@@ -20,6 +20,7 @@ setup(
         "matplotlib",
         "torchvision>=0.4.2",
         "sklearn",
+        "unrar",
     ],
     extras_require={"dev": ["isort", "black", "flake8", "flake8-black",]},
     packages=find_packages(exclude=("configs", "tests")),

@@ -163,3 +163,30 @@ Please set `DATA.PATH_TO_DATA_DIR` to point to the folder containing the frame l
 
 
 Please put all annotation json files and the frame lists in the same folder, and set `DATA.PATH_TO_DATA_DIR` to the path. Set `DATA.PATH_PREFIX` to be the path to the folder containing extracted frames.
+
+
+## HMDB-51
+A utility script has is provided which:
+1. Downloads and unpacks the [dataset](http://serre-lab.clps.brown.edu/wp-content/uploads/2013/10/hmdb51_org.rar)
+
+2. Downloads and unpacks the [train-test-splits](http://serre-lab.clps.brown.edu/wp-content/uploads/2013/10/test_train_splits.rar)
+
+
+It can be executed using
+```bash
+python ./src/datasets/hmdb51.py --path /where/you/want/the/dataset/
+```
+
+
+## UCF-101
+A utility script has is provided which:
+1. Downloads and unpacks the [dataset](http://storage.googleapis.com/thumos14_files/UCF101_videos.zip)
+
+2. Downloads and unpacks the [train-test-splits](https://www.crcv.ucf.edu/data/UCF101/UCF101TrainTestSplits-RecognitionTask.zip)
+
+3. Restructures the _dataset_ to match the _train-test-splits_ structure.
+
+It can be executed using
+```bash
+python ./src/datasets/ucf101.py --path /where/you/want/the/dataset/
+```
