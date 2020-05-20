@@ -1,12 +1,11 @@
 #!/usr/bin/env python3
-# Copyright (c) Facebook, Inc. and its affiliates. All Rights Reserved.
 
 from setuptools import find_packages, setup
 
 setup(
     name="slowfast",
     version="1.0",
-    author="FAIR",
+    author="Lukas Hedegaard & FAIR",
     url="unknown",
     description="SlowFast Video Understanding",
     install_requires=[
@@ -22,5 +21,6 @@ setup(
         "torchvision>=0.4.2",
         "sklearn",
     ],
+    extras_require={"dev": ["isort", "black", "flake8", "flake8-black",]},
     packages=find_packages(exclude=("configs", "tests")),
 )
