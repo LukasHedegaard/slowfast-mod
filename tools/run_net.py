@@ -5,9 +5,8 @@
 
 import torch
 
-import slowfast.utils.multiprocessing as mpu
-from slowfast.utils.parser import load_config, parse_args
-
+import src.utils.multiprocessing as mpu
+from src.utils.parser import load_config, parse_args
 from test_net import test
 from train_net import train
 

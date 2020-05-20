@@ -8,16 +8,16 @@ import pprint
 import torch
 from fvcore.nn.precise_bn import get_bn_modules, update_bn_stats
 
-import slowfast.models.losses as losses
-import slowfast.models.optimizer as optim
-import slowfast.utils.checkpoint as cu
-import slowfast.utils.distributed as du
-import slowfast.utils.logging as logging
-import slowfast.utils.metrics as metrics
-import slowfast.utils.misc as misc
-from slowfast.datasets import loader
-from slowfast.models import build_model
-from slowfast.utils.meters import AVAMeter, TrainMeter, ValMeter
+import src.models.losses as losses
+import src.models.optimizer as optim
+import src.utils.checkpoint as cu
+import src.utils.distributed as du
+import src.utils.logging as logging
+import src.utils.metrics as metrics
+import src.utils.misc as misc
+from src.datasets import loader
+from src.models import build_model
+from src.utils.meters import AVAMeter, TrainMeter, ValMeter
 
 logger = logging.get_logger(__name__)
 

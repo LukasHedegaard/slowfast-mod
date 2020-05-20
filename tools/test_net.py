@@ -6,13 +6,13 @@
 import numpy as np
 import torch
 
-import slowfast.utils.checkpoint as cu
-import slowfast.utils.distributed as du
-import slowfast.utils.logging as logging
-import slowfast.utils.misc as misc
-from slowfast.datasets import loader
-from slowfast.models import build_model
-from slowfast.utils.meters import AVAMeter, TestMeter
+import src.utils.checkpoint as cu
+import src.utils.distributed as du
+import src.utils.logging as logging
+import src.utils.misc as misc
+from src.datasets import loader
+from src.models import build_model
+from src.utils.meters import AVAMeter, TestMeter
 
 logger = logging.get_logger(__name__)
 

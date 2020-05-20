@@ -229,7 +229,7 @@ _C.SLOWFAST.FUSION_KERNEL_SZ = 5
 _C.DATA = CfgNode()
 
 # The path to the data directory.
-_C.DATA.PATH_TO_DATA_DIR = ""
+_C.DATA.PATH_TO_DATA_DIR = "~/Projects/datasets/"
 
 # Video path prefix if any.
 _C.DATA.PATH_PREFIX = ""
