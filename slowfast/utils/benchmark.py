@@ -40,9 +40,7 @@ def benchmark_data_loading(cfg):
 
     timer = Timer()
     dataloader = loader.construct_loader(cfg, "train")
-    logger.info(
-        "Initialize loader using {:.2f} seconds.".format(timer.seconds())
-    )
+    logger.info("Initialize loader using {:.2f} seconds.".format(timer.seconds()))
     # Total batch size across different machines.
     batch_size = cfg.TRAIN.BATCH_SIZE * cfg.NUM_SHARDS
     log_period = cfg.BENCHMARK.LOG_PERIOD
@@ -96,8 +94,6 @@ def benchmark_data_loading(cfg):
     logger.info(
         "On average every epoch ({} videos) takes {:.2f}/{:.2f} "
         "(avg/std) seconds.".format(
-            len(dataloader) * batch_size,
-            np.mean(epoch_times),
-            np.std(epoch_times),
+            len(dataloader) * batch_size, np.mean(epoch_times), np.std(epoch_times),
         )
     )

@@ -41,9 +41,9 @@ def detection_collate(batch):
             bboxes = np.concatenate(bboxes, axis=0)
             collated_extra_data[key] = torch.tensor(bboxes).float()
         elif key == "metadata":
-            collated_extra_data[key] = torch.tensor(
-                list(itertools.chain(*data))
-            ).view(-1, 2)
+            collated_extra_data[key] = torch.tensor(list(itertools.chain(*data))).view(
+                -1, 2
+            )
         else:
             collated_extra_data[key] = default_collate(data)
 

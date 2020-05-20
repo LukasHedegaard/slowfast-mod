@@ -1,7 +1,6 @@
 #!/usr/bin/env python3
 # Copyright (c) Facebook, Inc. and its affiliates. All Rights Reserved.
 
-import logging
 import math
 import numpy as np
 import os
@@ -118,9 +117,7 @@ def log_model_info(model, cfg, is_train=True):
     logger.info("Model:\n{}".format(model))
     logger.info("Params: {:,}".format(params_count(model)))
     logger.info("Mem: {:,} MB".format(gpu_mem_usage()))
-    logger.info(
-        "FLOPs: {:,} GFLOPs".format(get_flop_stats(model, cfg, is_train))
-    )
+    logger.info("FLOPs: {:,} GFLOPs".format(get_flop_stats(model, cfg, is_train)))
     logger.info("nvidia-smi")
     os.system("nvidia-smi")
 

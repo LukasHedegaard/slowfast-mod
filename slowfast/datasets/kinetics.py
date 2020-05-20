@@ -66,9 +66,7 @@ class Kinetics(torch.utils.data.Dataset):
         if self.mode in ["train", "val"]:
             self._num_clips = 1
         elif self.mode in ["test"]:
-            self._num_clips = (
-                cfg.TEST.NUM_ENSEMBLE_VIEWS * cfg.TEST.NUM_SPATIAL_CROPS
-            )
+            self._num_clips = cfg.TEST.NUM_ENSEMBLE_VIEWS * cfg.TEST.NUM_SPATIAL_CROPS
 
         logger.info("Constructing Kinetics {}...".format(mode))
         self._construct_loader()
@@ -80,9 +78,7 @@ class Kinetics(torch.utils.data.Dataset):
         path_to_file = os.path.join(
             self.cfg.DATA.PATH_TO_DATA_DIR, "{}.csv".format(self.mode)
         )
-        assert PathManager.exists(path_to_file), "{} dir not found".format(
-            path_to_file
-        )
+        assert PathManager.exists(path_to_file), "{} dir not found".format(path_to_file)
 
         self._path_to_videos = []
         self._labels = []
@@ -133,24 +129,20 @@ class Kinetics(torch.utils.data.Dataset):
             crop_size = self.cfg.DATA.TRAIN_CROP_SIZE
         elif self.mode in ["test"]:
             temporal_sample_index = (
-                self._spatial_temporal_idx[index]
-                // self.cfg.TEST.NUM_SPATIAL_CROPS
+                self._spatial_temporal_idx[index] // self.cfg.TEST.NUM_SPATIAL_CROPS
             )
             # spatial_sample_index is in [0, 1, 2]. Corresponding to left,
             # center, or right if width is larger than height, and top, middle,
             # or bottom if height is larger than width.
             spatial_sample_index = (
-                self._spatial_temporal_idx[index]
-                % self.cfg.TEST.NUM_SPATIAL_CROPS
+                self._spatial_temporal_idx[index] % self.cfg.TEST.NUM_SPATIAL_CROPS
             )
             min_scale, max_scale, crop_size = [self.cfg.DATA.TEST_CROP_SIZE] * 3
             # The testing is deterministic and no jitter should be performed.
             # min_scale, max_scale, and crop_size are expect to be the same.
             assert len({min_scale, max_scale, crop_size}) == 1
         else:
-            raise NotImplementedError(
-                "Does not support {} mode".format(self.mode)
-            )
+            raise NotImplementedError("Does not support {} mode".format(self.mode))
 
         # Try to decode and sample a clip from a video. If the video can not be
         # decoded, repeatly find a random video replacement that can be decoded.
@@ -214,9 +206,7 @@ class Kinetics(torch.utils.data.Dataset):
             return frames, label, index, {}
         else:
             raise RuntimeError(
-                "Failed to fetch video after {} retries.".format(
-                    self._num_retries
-                )
+                "Failed to fetch video after {} retries.".format(self._num_retries)
             )
 
     def __len__(self):

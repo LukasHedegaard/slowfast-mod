@@ -35,10 +35,7 @@ def parse_args():
         type=int,
     )
     parser.add_argument(
-        "--num_shards",
-        help="Number of shards using by the job",
-        default=1,
-        type=int,
+        "--num_shards", help="Number of shards using by the job", default=1, type=int,
     )
     parser.add_argument(
         "--init_method",

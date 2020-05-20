@@ -54,9 +54,7 @@ class Nonlocal(nn.Module):
         self.pool_size = pool_size
         self.instantiation = instantiation
         self.use_pool = (
-            False
-            if pool_size is None
-            else any((size > 1 for size in pool_size))
+            False if pool_size is None else any((size > 1 for size in pool_size))
         )
         self.norm_eps = norm_eps
         self.norm_momentum = norm_momentum
@@ -87,9 +85,7 @@ class Nonlocal(nn.Module):
 
         # TODO: change the name to `norm`
         self.bn = norm_module(
-            num_features=self.dim,
-            eps=self.norm_eps,
-            momentum=self.norm_momentum,
+            num_features=self.dim, eps=self.norm_eps, momentum=self.norm_momentum,
         )
         # Zero initializing the final bn.
         self.bn.transform_final_bn = zero_init_final_norm
@@ -97,9 +93,7 @@ class Nonlocal(nn.Module):
         # Optional to add the spatial-temporal pooling.
         if self.use_pool:
             self.pool = nn.MaxPool3d(
-                kernel_size=self.pool_size,
-                stride=self.pool_size,
-                padding=[0, 0, 0],
+                kernel_size=self.pool_size, stride=self.pool_size, padding=[0, 0, 0],
             )
 
     def forward(self, x):
@@ -133,9 +127,7 @@ class Nonlocal(nn.Module):
             spatial_temporal_dim = theta_phi.shape[2]
             theta_phi = theta_phi / spatial_temporal_dim
         else:
-            raise NotImplementedError(
-                "Unknown norm type {}".format(self.instantiation)
-            )
+            raise NotImplementedError("Unknown norm type {}".format(self.instantiation))
 
         # (N, TxHxW, TxHxW) * (N, C, TxHxW) => (N, C, TxHxW).
         theta_phi_g = torch.einsum("ntg,ncg->nct", (theta_phi, g))

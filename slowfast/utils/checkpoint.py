@@ -137,15 +137,11 @@ def inflate_weight(state_dict_2d, state_dict_3d):
         v3d = state_dict_3d[k]
         # Inflate the weight of 2D conv to 3D conv.
         if len(v2d.shape) == 4 and len(v3d.shape) == 5:
-            logger.info(
-                "Inflate {}: {} -> {}: {}".format(k, v2d.shape, k, v3d.shape)
-            )
+            logger.info("Inflate {}: {} -> {}: {}".format(k, v2d.shape, k, v3d.shape))
             # Dimension need to be match.
             assert v2d.shape[-2:] == v3d.shape[-2:]
             assert v2d.shape[:2] == v3d.shape[:2]
-            v3d = (
-                v2d.unsqueeze(2).repeat(1, 1, v3d.shape[2], 1, 1) / v3d.shape[2]
-            )
+            v3d = v2d.unsqueeze(2).repeat(1, 1, v3d.shape[2], 1, 1) / v3d.shape[2]
         if v2d.shape == v3d.shape:
             v3d = v2d
         state_dict_inflated[k] = v3d.clone()
@@ -175,9 +171,9 @@ def load_checkpoint(
     Returns:
         (int): the number of training epoch of the checkpoint.
     """
-    assert PathManager.exists(
+    assert PathManager.exists(path_to_checkpoint), "Checkpoint '{}' not found".format(
         path_to_checkpoint
-    ), "Checkpoint '{}' not found".format(path_to_checkpoint)
+    )
     # Account for the DDP wrapper in the multi-gpu setting.
     ms = model.module if data_parallel else model
     if convert_from_caffe2:
@@ -216,9 +212,7 @@ def load_checkpoint(
                     prefix in key for prefix in ["momentum", "lr", "model_iter"]
                 ):
                     logger.warn(
-                        "!! {}: can not be converted, got {}".format(
-                            key, converted_key
-                        )
+                        "!! {}: can not be converted, got {}".format(key, converted_key)
                     )
         ms.load_state_dict(state_dict, strict=False)
         epoch = -1
@@ -229,9 +223,7 @@ def load_checkpoint(
         if inflation:
             # Try to inflate the model.
             model_state_dict_3d = (
-                model.module.state_dict()
-                if data_parallel
-                else model.state_dict()
+                model.module.state_dict() if data_parallel else model.state_dict()
             )
             inflated_model_dict = inflate_weight(
                 checkpoint["model_state"], model_state_dict_3d

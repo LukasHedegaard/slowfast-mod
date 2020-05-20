@@ -28,9 +28,7 @@ def load_image_lists(cfg, is_train):
     """
     list_filenames = [
         os.path.join(cfg.AVA.FRAME_LIST_DIR, filename)
-        for filename in (
-            cfg.AVA.TRAIN_LISTS if is_train else cfg.AVA.TEST_LISTS
-        )
+        for filename in (cfg.AVA.TRAIN_LISTS if is_train else cfg.AVA.TEST_LISTS)
     ]
     image_paths = defaultdict(list)
     video_name_to_idx = {}
@@ -52,15 +50,11 @@ def load_image_lists(cfg, is_train):
 
                 data_key = video_name_to_idx[video_name]
 
-                image_paths[data_key].append(
-                    os.path.join(cfg.AVA.FRAME_DIR, row[3])
-                )
+                image_paths[data_key].append(os.path.join(cfg.AVA.FRAME_DIR, row[3]))
 
     image_paths = [image_paths[i] for i in range(len(image_paths))]
 
-    logger.info(
-        "Finished loading image paths from: %s" % ", ".join(list_filenames)
-    )
+    logger.info("Finished loading image paths from: %s" % ", ".join(list_filenames))
 
     return image_paths, video_idx_to_name
 
@@ -142,9 +136,7 @@ def load_boxes_and_labels(cfg, mode):
                 all_boxes[video_name][frame_sec].values()
             )
 
-    logger.info(
-        "Finished loading annotations from: %s" % ", ".join(ann_filenames)
-    )
+    logger.info("Finished loading annotations from: %s" % ", ".join(ann_filenames))
     logger.info("Detection threshold: {}".format(detect_thresh))
     logger.info("Number of unique boxes: %d" % unique_box_count)
     logger.info("Number of annotations: %d" % count)
@@ -185,9 +177,7 @@ def get_keyframe_data(boxes_and_labels):
                 continue
 
             if len(boxes_and_labels[video_idx][sec]) > 0:
-                keyframe_indices.append(
-                    (video_idx, sec_idx, sec, sec_to_frame(sec))
-                )
+                keyframe_indices.append((video_idx, sec_idx, sec, sec_to_frame(sec)))
                 keyframe_boxes_and_labels[video_idx].append(
                     boxes_and_labels[video_idx][sec]
                 )

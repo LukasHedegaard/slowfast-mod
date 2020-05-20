@@ -115,9 +115,7 @@ class FuseFastToSlow(nn.Module):
             bias=False,
         )
         self.bn = norm_module(
-            num_features=dim_in * fusion_conv_channel_ratio,
-            eps=eps,
-            momentum=bn_mmt,
+            num_features=dim_in * fusion_conv_channel_ratio, eps=eps, momentum=bn_mmt,
         )
         self.relu = nn.ReLU(inplace_relu)
 
@@ -176,9 +174,7 @@ class SlowFast(nn.Module):
         num_groups = cfg.RESNET.NUM_GROUPS
         width_per_group = cfg.RESNET.WIDTH_PER_GROUP
         dim_inner = num_groups * width_per_group
-        out_dim_ratio = (
-            cfg.SLOWFAST.BETA_INV // cfg.SLOWFAST.FUSION_CONV_CHANNEL_RATIO
-        )
+        out_dim_ratio = cfg.SLOWFAST.BETA_INV // cfg.SLOWFAST.FUSION_CONV_CHANNEL_RATIO
 
         temp_kernel = _TEMPORAL_KERNEL_BASIS[cfg.MODEL.ARCH]
 
@@ -335,9 +331,7 @@ class SlowFast(nn.Module):
                 num_classes=cfg.MODEL.NUM_CLASSES,
                 pool_size=[
                     [
-                        cfg.DATA.NUM_FRAMES
-                        // cfg.SLOWFAST.ALPHA
-                        // pool_size[0][0],
+                        cfg.DATA.NUM_FRAMES // cfg.SLOWFAST.ALPHA // pool_size[0][0],
                         1,
                         1,
                     ],
@@ -358,9 +352,7 @@ class SlowFast(nn.Module):
                 num_classes=cfg.MODEL.NUM_CLASSES,
                 pool_size=[
                     [
-                        cfg.DATA.NUM_FRAMES
-                        // cfg.SLOWFAST.ALPHA
-                        // pool_size[0][0],
+                        cfg.DATA.NUM_FRAMES // cfg.SLOWFAST.ALPHA // pool_size[0][0],
                         cfg.DATA.CROP_SIZE // 32 // pool_size[0][1],
                         cfg.DATA.CROP_SIZE // 32 // pool_size[0][2],
                     ],

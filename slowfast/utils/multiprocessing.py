@@ -6,9 +6,7 @@
 import torch
 
 
-def run(
-    local_rank, num_proc, func, init_method, shard_id, num_shards, backend, cfg
-):
+def run(local_rank, num_proc, func, init_method, shard_id, num_shards, backend, cfg):
     """
     Runs a function from a child process.
     Args:
@@ -38,10 +36,7 @@ def run(
 
     try:
         torch.distributed.init_process_group(
-            backend=backend,
-            init_method=init_method,
-            world_size=world_size,
-            rank=rank,
+            backend=backend, init_method=init_method, world_size=world_size, rank=rank,
         )
     except Exception as e:
         raise e

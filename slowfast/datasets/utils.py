@@ -5,10 +5,9 @@ import numpy as np
 import os
 import time
 from collections import defaultdict
+import cv2
 import torch
 from fvcore.common.file_io import PathManager
-
-import cv2
 
 from . import transform as transform
 
@@ -185,8 +184,8 @@ def aggregate_labels(label_list):
     """
     all_labels = []
     for labels in label_list:
-        for l in labels:
-            all_labels.append(l)
+        for lbl in labels:
+            all_labels.append(lbl)
     return list(set(all_labels))
 
 
@@ -237,9 +236,7 @@ def load_image_lists(frame_list_file, prefix="", return_list=False):
             image_paths[video_name].append(path)
             frame_labels = row[-1].replace('"', "")
             if frame_labels != "":
-                labels[video_name].append(
-                    [int(x) for x in frame_labels.split(",")]
-                )
+                labels[video_name].append([int(x) for x in frame_labels.split(",")])
             else:
                 labels[video_name].append([])
 

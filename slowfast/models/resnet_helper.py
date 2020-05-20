@@ -157,24 +157,11 @@ class BottleneckTransform(nn.Module):
         self._bn_mmt = bn_mmt
         self._stride_1x1 = stride_1x1
         self._construct(
-            dim_in,
-            dim_out,
-            stride,
-            dim_inner,
-            num_groups,
-            dilation,
-            norm_module,
+            dim_in, dim_out, stride, dim_inner, num_groups, dilation, norm_module,
         )
 
     def _construct(
-        self,
-        dim_in,
-        dim_out,
-        stride,
-        dim_inner,
-        num_groups,
-        dilation,
-        norm_module,
+        self, dim_in, dim_out, stride, dim_inner, num_groups, dilation, norm_module,
     ):
         (str1x1, str3x3) = (stride, 1) if self._stride_1x1 else (1, stride)
 
@@ -523,9 +510,7 @@ class ResStage(nn.Module):
                         instantiation=instantiation,
                         norm_module=norm_module,
                     )
-                    self.add_module(
-                        "pathway{}_nonlocal{}".format(pathway, i), nln
-                    )
+                    self.add_module("pathway{}_nonlocal{}".format(pathway, i), nln)
 
     def forward(self, inputs):
         output = []
@@ -535,9 +520,7 @@ class ResStage(nn.Module):
                 m = getattr(self, "pathway{}_res{}".format(pathway, i))
                 x = m(x)
                 if hasattr(self, "pathway{}_nonlocal{}".format(pathway, i)):
-                    nln = getattr(
-                        self, "pathway{}_nonlocal{}".format(pathway, i)
-                    )
+                    nln = getattr(self, "pathway{}_nonlocal{}".format(pathway, i))
                     b, c, t, h, w = x.shape
                     if self.nonlocal_group[pathway] > 1:
                         # Fold temporal dimension into batch dimension.

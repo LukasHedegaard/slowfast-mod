@@ -25,9 +25,7 @@ def get_norm(cfg):
     elif cfg.BN.NORM_TYPE == "sub_batchnorm":
         return partial(SubBatchNorm3d, num_splits=cfg.BN.NUM_SPLITS)
     elif cfg.BN.NORM_TYPE == "sync_batchnorm":
-        return partial(
-            NaiveSyncBatchNorm3d, num_sync_devices=cfg.BN.NUM_SYNC_DEVICES
-        )
+        return partial(NaiveSyncBatchNorm3d, num_sync_devices=cfg.BN.NUM_SYNC_DEVICES)
     else:
         raise NotImplementedError(
             "Norm type {} is not supported".format(cfg.BN.NORM_TYPE)
@@ -90,9 +88,7 @@ class SubBatchNorm3d(nn.Module):
                 self.bn.running_mean.data,
                 self.bn.running_var.data,
             ) = self._get_aggregated_mean_std(
-                self.split_bn.running_mean,
-                self.split_bn.running_var,
-                self.num_splits,
+                self.split_bn.running_mean, self.split_bn.running_var, self.num_splits,
             )
 
     def forward(self, x):
@@ -123,9 +119,7 @@ class GroupGather(Function):
         ctx.num_sync_devices = num_sync_devices
         ctx.num_groups = num_groups
 
-        input_list = [
-            torch.zeros_like(input) for k in range(du.get_local_size())
-        ]
+        input_list = [torch.zeros_like(input) for k in range(du.get_local_size())]
         dist.all_gather(
             input_list, input, async_op=False, group=du._LOCAL_PROCESS_GROUP
         )
@@ -135,9 +129,7 @@ class GroupGather(Function):
             rank = du.get_local_rank()
             group_idx = rank // num_sync_devices
             inputs = inputs[
-                group_idx
-                * num_sync_devices : (group_idx + 1)
-                * num_sync_devices
+                group_idx * num_sync_devices : (group_idx + 1) * num_sync_devices
             ]
         inputs = torch.sum(inputs, dim=0)
         return inputs

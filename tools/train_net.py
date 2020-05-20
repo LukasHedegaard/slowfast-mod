@@ -106,9 +106,7 @@ def train_epoch(train_loader, model, optimizer, train_meter, cur_epoch, cfg):
 
                 # Gather all the predictions across all the devices.
                 if cfg.NUM_GPUS > 1:
-                    loss, top1_err, top5_err = du.all_reduce(
-                        [loss, top1_err, top5_err]
-                    )
+                    loss, top1_err, top5_err = du.all_reduce([loss, top1_err, top5_err])
 
                 # Copy the stats from GPU to CPU (sync point).
                 loss, top1_err, top5_err = (

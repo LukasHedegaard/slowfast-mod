@@ -20,20 +20,10 @@ detection is supported by default.
 Based on the settings, per image evaluation is either performed on boxes or
 on object masks.
 """
-from __future__ import (
-    absolute_import,
-    division,
-    print_function,
-    unicode_literals,
-)
+from __future__ import absolute_import, division, print_function, unicode_literals
 import numpy as np
 
-from . import (
-    np_box_list,
-    np_box_list_ops,
-    np_box_mask_list,
-    np_box_mask_list_ops,
-)
+from . import np_box_list, np_box_list_ops
 
 
 class PerImageEvaluation(object):
@@ -106,10 +96,7 @@ class PerImageEvaluation(object):
             detected_class_labels,
             detected_masks,
         ) = self._remove_invalid_boxes(
-            detected_boxes,
-            detected_scores,
-            detected_class_labels,
-            detected_masks,
+            detected_boxes, detected_scores, detected_class_labels, detected_masks,
         )
         scores, tp_fp_labels = self._compute_tp_fp(
             detected_boxes=detected_boxes,
@@ -302,12 +289,7 @@ class PerImageEvaluation(object):
         if detected_boxes.size == 0:
             return np.array([], dtype=float), np.array([], dtype=bool)
 
-        (
-            iou,
-            _,
-            scores,
-            num_detected_boxes,
-        ) = self._get_overlaps_and_scores_box_mode(
+        (iou, _, scores, num_detected_boxes,) = self._get_overlaps_and_scores_box_mode(
             detected_boxes=detected_boxes,
             detected_scores=detected_scores,
             groundtruth_boxes=groundtruth_boxes,
@@ -346,9 +328,7 @@ class PerImageEvaluation(object):
 
         return (
             scores[~is_matched_to_difficult_box & ~is_matched_to_group_of_box],
-            tp_fp_labels[
-                ~is_matched_to_difficult_box & ~is_matched_to_group_of_box
-            ],
+            tp_fp_labels[~is_matched_to_difficult_box & ~is_matched_to_group_of_box],
         )
 
     def _get_ith_class_arrays(

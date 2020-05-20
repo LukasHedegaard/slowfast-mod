@@ -27,12 +27,7 @@ It supports the following operations:
 Note: This module operates on numpy boxes and box lists.
 """
 
-from __future__ import (
-    absolute_import,
-    division,
-    print_function,
-    unicode_literals,
-)
+from __future__ import absolute_import, division, print_function, unicode_literals
 import collections
 import logging
 import numpy as np
@@ -182,18 +177,14 @@ class ObjectDetectionEvaluator(DetectionEvaluator):
             raise ValueError("Image with id {} already added.".format(image_id))
 
         groundtruth_classes = (
-            groundtruth_dict[
-                standard_fields.InputDataFields.groundtruth_classes
-            ]
+            groundtruth_dict[standard_fields.InputDataFields.groundtruth_classes]
             - self._label_id_offset
         )
         # If the key is not present in the groundtruth_dict or the array is empty
         # (unless there are no annotations for the groundtruth on this image)
         # use values from the dictionary or insert None otherwise.
         if standard_fields.InputDataFields.groundtruth_difficult in groundtruth_dict.keys() and (
-            groundtruth_dict[
-                standard_fields.InputDataFields.groundtruth_difficult
-            ].size
+            groundtruth_dict[standard_fields.InputDataFields.groundtruth_difficult].size
             or not groundtruth_classes.size
         ):
             groundtruth_difficult = groundtruth_dict[
@@ -212,9 +203,7 @@ class ObjectDetectionEvaluator(DetectionEvaluator):
                 standard_fields.InputDataFields.groundtruth_instance_masks
                 not in groundtruth_dict
             ):
-                raise ValueError(
-                    "Instance masks not in groundtruth dictionary."
-                )
+                raise ValueError("Instance masks not in groundtruth dictionary.")
             groundtruth_masks = groundtruth_dict[
                 standard_fields.InputDataFields.groundtruth_instance_masks
             ]
@@ -251,9 +240,7 @@ class ObjectDetectionEvaluator(DetectionEvaluator):
       ValueError: If detection masks are not in detections dictionary.
     """
         detection_classes = (
-            detections_dict[
-                standard_fields.DetectionResultFields.detection_classes
-            ]
+            detections_dict[standard_fields.DetectionResultFields.detection_classes]
             - self._label_id_offset
         )
         detection_masks = None
@@ -262,9 +249,7 @@ class ObjectDetectionEvaluator(DetectionEvaluator):
                 standard_fields.DetectionResultFields.detection_masks
                 not in detections_dict
             ):
-                raise ValueError(
-                    "Detection masks not in detections dictionary."
-                )
+                raise ValueError("Detection masks not in detections dictionary.")
             detection_masks = detections_dict[
                 standard_fields.DetectionResultFields.detection_masks
             ]
@@ -303,16 +288,12 @@ class ObjectDetectionEvaluator(DetectionEvaluator):
         ) = self._evaluation.evaluate()
         pascal_metrics = {
             self._metric_prefix
-            + "Precision/mAP@{}IOU".format(
-                self._matching_iou_threshold
-            ): mean_ap
+            + "Precision/mAP@{}IOU".format(self._matching_iou_threshold): mean_ap
         }
         if self._evaluate_corlocs:
             pascal_metrics[
                 self._metric_prefix
-                + "Precision/meanCorLoc@{}IOU".format(
-                    self._matching_iou_threshold
-                )
+                + "Precision/meanCorLoc@{}IOU".format(self._matching_iou_threshold)
             ] = mean_corloc
         category_index = label_map_util.create_category_index(self._categories)
         for idx in range(per_class_ap.size):
@@ -433,9 +414,7 @@ class OpenImagesDetectionEvaluator(ObjectDetectionEvaluator):
     handles those boxes appropriately.
   """
 
-    def __init__(
-        self, categories, matching_iou_threshold=0.5, evaluate_corlocs=False
-    ):
+    def __init__(self, categories, matching_iou_threshold=0.5, evaluate_corlocs=False):
         """Constructor.
 
     Args:
@@ -476,18 +455,14 @@ class OpenImagesDetectionEvaluator(ObjectDetectionEvaluator):
             raise ValueError("Image with id {} already added.".format(image_id))
 
         groundtruth_classes = (
-            groundtruth_dict[
-                standard_fields.InputDataFields.groundtruth_classes
-            ]
+            groundtruth_dict[standard_fields.InputDataFields.groundtruth_classes]
             - self._label_id_offset
         )
         # If the key is not present in the groundtruth_dict or the array is empty
         # (unless there are no annotations for the groundtruth on this image)
         # use values from the dictionary or insert None otherwise.
         if standard_fields.InputDataFields.groundtruth_group_of in groundtruth_dict.keys() and (
-            groundtruth_dict[
-                standard_fields.InputDataFields.groundtruth_group_of
-            ].size
+            groundtruth_dict[standard_fields.InputDataFields.groundtruth_group_of].size
             or not groundtruth_classes.size
         ):
             groundtruth_group_of = groundtruth_dict[
@@ -536,9 +511,7 @@ class ObjectDetectionEvaluation(object):
         label_id_offset=0,
     ):
         if num_groundtruth_classes < 1:
-            raise ValueError(
-                "Need at least 1 groundtruth class for evaluation."
-            )
+            raise ValueError("Need at least 1 groundtruth class for evaluation.")
 
         self.per_image_eval = per_image_evaluation.PerImageEvaluation(
             num_groundtruth_classes=num_groundtruth_classes,
@@ -656,9 +629,9 @@ class ObjectDetectionEvaluation(object):
       ValueError: if the number of boxes, scores and class labels differ in
         length.
     """
-        if len(detected_boxes) != len(detected_scores) or len(
-            detected_boxes
-        ) != len(detected_class_labels):
+        if len(detected_boxes) != len(detected_scores) or len(detected_boxes) != len(
+            detected_class_labels
+        ):
             raise ValueError(
                 "detected_boxes, detected_scores and "
                 "detected_class_labels should all have same lengths. Got"
@@ -684,9 +657,7 @@ class ObjectDetectionEvaluation(object):
             groundtruth_is_difficult_list = self.groundtruth_is_difficult_list[
                 image_key
             ]
-            groundtruth_is_group_of_list = self.groundtruth_is_group_of_list[
-                image_key
-            ]
+            groundtruth_is_group_of_list = self.groundtruth_is_group_of_list[image_key]
         else:
             groundtruth_boxes = np.empty(shape=[0, 4], dtype=float)
             groundtruth_class_labels = np.array([], dtype=int)
@@ -696,10 +667,7 @@ class ObjectDetectionEvaluation(object):
                 groundtruth_masks = np.empty(shape=[0, 1, 1], dtype=float)
             groundtruth_is_difficult_list = np.array([], dtype=bool)
             groundtruth_is_group_of_list = np.array([], dtype=bool)
-        (
-            scores,
-            tp_fp_labels,
-        ) = self.per_image_eval.compute_object_detection_metrics(
+        (scores, tp_fp_labels,) = self.per_image_eval.compute_object_detection_metrics(
             detected_boxes=detected_boxes,
             detected_scores=detected_scores,
             detected_class_labels=detected_class_labels,
@@ -740,8 +708,7 @@ class ObjectDetectionEvaluation(object):
         for class_index in range(self.num_class):
             num_gt_instances = np.sum(
                 groundtruth_class_labels[
-                    ~groundtruth_is_difficult_list
-                    & ~groundtruth_is_group_of_list
+                    ~groundtruth_is_difficult_list & ~groundtruth_is_group_of_list
                 ]
                 == class_index
             )
@@ -782,27 +749,20 @@ class ObjectDetectionEvaluation(object):
                 tp_fp_labels = np.array([], dtype=bool)
             else:
                 scores = np.concatenate(self.scores_per_class[class_index])
-                tp_fp_labels = np.concatenate(
-                    self.tp_fp_labels_per_class[class_index]
-                )
+                tp_fp_labels = np.concatenate(self.tp_fp_labels_per_class[class_index])
             if self.use_weighted_mean_ap:
                 all_scores = np.append(all_scores, scores)
                 all_tp_fp_labels = np.append(all_tp_fp_labels, tp_fp_labels)
             precision, recall = metrics.compute_precision_recall(
-                scores,
-                tp_fp_labels,
-                self.num_gt_instances_per_class[class_index],
+                scores, tp_fp_labels, self.num_gt_instances_per_class[class_index],
             )
             self.precisions_per_class.append(precision)
             self.recalls_per_class.append(recall)
-            average_precision = metrics.compute_average_precision(
-                precision, recall
-            )
+            average_precision = metrics.compute_average_precision(precision, recall)
             self.average_precision_per_class[class_index] = average_precision
 
         self.corloc_per_class = metrics.compute_cor_loc(
-            self.num_gt_imgs_per_class,
-            self.num_images_correctly_detected_per_class,
+            self.num_gt_imgs_per_class, self.num_images_correctly_detected_per_class,
         )
 
         if self.use_weighted_mean_ap:

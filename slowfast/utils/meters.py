@@ -9,6 +9,7 @@ import os
 from collections import defaultdict, deque
 import torch
 from fvcore.common.timer import Timer
+from sklearn.metrics import average_precision_score
 
 import slowfast.datasets.ava_helper as ava_helper
 import slowfast.utils.logging as logging
@@ -20,8 +21,6 @@ from slowfast.utils.ava_eval_helper import (
     read_exclusions,
     read_labelmap,
 )
-
-from sklearn.metrics import average_precision_score
 
 logger = logging.get_logger(__name__)
 
@@ -71,15 +70,11 @@ class AVAMeter(object):
         self.categories, self.class_whitelist = read_labelmap(
             os.path.join(cfg.AVA.ANNOTATION_DIR, cfg.AVA.LABEL_MAP_FILE)
         )
-        gt_filename = os.path.join(
-            cfg.AVA.ANNOTATION_DIR, cfg.AVA.GROUNDTRUTH_FILE
-        )
+        gt_filename = os.path.join(cfg.AVA.ANNOTATION_DIR, cfg.AVA.GROUNDTRUTH_FILE)
         self.full_groundtruth = read_csv(gt_filename, self.class_whitelist)
         self.mini_groundtruth = get_ava_mini_groundtruth(self.full_groundtruth)
 
-        _, self.video_idx_to_name = ava_helper.load_image_lists(
-            cfg, mode == "train"
-        )
+        _, self.video_idx_to_name = ava_helper.load_image_lists(cfg, mode == "train")
 
     def log_iter_stats(self, cur_epoch, cur_iter):
         """
@@ -304,9 +299,7 @@ class TestMeter(object):
                 )
             else:
                 raise NotImplementedError(
-                    "Ensemble Method {} is not supported".format(
-                        self.ensemble_method
-                    )
+                    "Ensemble Method {} is not supported".format(self.ensemble_method)
                 )
             self.clip_count[vid_id] += 1
 
@@ -361,15 +354,10 @@ class TestMeter(object):
             num_topks_correct = metrics.topks_correct(
                 self.video_preds, self.video_labels, ks
             )
-            topks = [
-                (x / self.video_preds.size(0)) * 100.0
-                for x in num_topks_correct
-            ]
+            topks = [(x / self.video_preds.size(0)) * 100.0 for x in num_topks_correct]
             assert len({len(ks), len(topks)}) == 1
             for k, topk in zip(ks, topks):
-                stats["top{}_acc".format(k)] = "{:.{prec}f}".format(
-                    topk, prec=2
-                )
+                stats["top{}_acc".format(k)] = "{:.{prec}f}".format(topk, prec=2)
         logging.log_json_stats(stats)
 
 

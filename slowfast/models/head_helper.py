@@ -67,9 +67,7 @@ class ResNetRoIHead(nn.Module):
         ), "pathway dimensions are not consistent."
         self.num_pathways = len(pool_size)
         for pathway in range(self.num_pathways):
-            temporal_pool = nn.AvgPool3d(
-                [pool_size[pathway][0], 1, 1], stride=1
-            )
+            temporal_pool = nn.AvgPool3d([pool_size[pathway][0], 1, 1], stride=1)
             self.add_module("s{}_tpool".format(pathway), temporal_pool)
 
             roi_align = ROIAlign(
@@ -96,8 +94,7 @@ class ResNetRoIHead(nn.Module):
             self.act = nn.Sigmoid()
         else:
             raise NotImplementedError(
-                "{} is not supported as an activation"
-                "function.".format(act_func)
+                "{} is not supported as an activation" "function.".format(act_func)
             )
 
     def forward(self, inputs, bboxes):
@@ -140,12 +137,7 @@ class ResNetBasicHead(nn.Module):
     """
 
     def __init__(
-        self,
-        dim_in,
-        num_classes,
-        pool_size,
-        dropout_rate=0.0,
-        act_func="softmax",
+        self, dim_in, num_classes, pool_size, dropout_rate=0.0, act_func="softmax",
     ):
         """
         The `__init__` method of any subclass should also contain these
@@ -188,8 +180,7 @@ class ResNetBasicHead(nn.Module):
             self.act = nn.Sigmoid()
         else:
             raise NotImplementedError(
-                "{} is not supported as an activation"
-                "function.".format(act_func)
+                "{} is not supported as an activation" "function.".format(act_func)
             )
 
     def forward(self, inputs):

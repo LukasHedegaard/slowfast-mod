@@ -74,9 +74,7 @@ def perform_test(test_loader, model, test_meter, cfg):
             test_meter.iter_toc()
             # Update and log stats.
             test_meter.update_stats(
-                preds.detach().cpu(),
-                ori_boxes.detach().cpu(),
-                metadata.detach().cpu(),
+                preds.detach().cpu(), ori_boxes.detach().cpu(), metadata.detach().cpu(),
             )
             test_meter.log_iter_stats(None, cur_iter)
         else:
@@ -85,16 +83,12 @@ def perform_test(test_loader, model, test_meter, cfg):
 
             # Gather all the predictions across all the devices to perform ensemble.
             if cfg.NUM_GPUS > 1:
-                preds, labels, video_idx = du.all_gather(
-                    [preds, labels, video_idx]
-                )
+                preds, labels, video_idx = du.all_gather([preds, labels, video_idx])
 
             test_meter.iter_toc()
             # Update and log stats.
             test_meter.update_stats(
-                preds.detach().cpu(),
-                labels.detach().cpu(),
-                video_idx.detach().cpu(),
+                preds.detach().cpu(), labels.detach().cpu(), video_idx.detach().cpu(),
             )
             test_meter.log_iter_stats(cur_iter)
 

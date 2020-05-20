@@ -3,7 +3,7 @@
 
 """Set up Environment."""
 
-import slowfast.utils.logging as logging
+# import slowfast.utils.logging as logging
 
 _ENV_SETUP_DONE = False
 

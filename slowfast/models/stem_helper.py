@@ -53,15 +53,7 @@ class VideoModelStem(nn.Module):
         super(VideoModelStem, self).__init__()
 
         assert (
-            len(
-                {
-                    len(dim_in),
-                    len(dim_out),
-                    len(kernel),
-                    len(stride),
-                    len(padding),
-                }
-            )
+            len({len(dim_in), len(dim_out), len(kernel), len(stride), len(padding),})
             == 1
         ), "Input pathway dimensions are not consistent."
         self.num_pathways = len(dim_in)
@@ -162,9 +154,7 @@ class ResNetBasicStem(nn.Module):
             padding=self.padding,
             bias=False,
         )
-        self.bn = norm_module(
-            num_features=dim_out, eps=self.eps, momentum=self.bn_mmt
-        )
+        self.bn = norm_module(num_features=dim_out, eps=self.eps, momentum=self.bn_mmt)
         self.relu = nn.ReLU(self.inplace_relu)
         self.pool_layer = nn.MaxPool3d(
             kernel_size=[1, 3, 3], stride=[1, 2, 2], padding=[0, 1, 1]
