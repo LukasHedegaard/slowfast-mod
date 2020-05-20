@@ -1,4 +1,4 @@
-# Human Action GCN Stitching
+# HAGS 🧙‍♀️🧙🏻‍♀️🧙🏾‍♀️ Human Action GCN Stitching
 [![Code style: black](https://img.shields.io/badge/code%20style-black-000000.svg)](https://github.com/psf/black)
 
 ## Description
@@ -6,7 +6,22 @@ Research repository for stitching together visual glimpses and superpixels using
 
 
 ## Installation
-Please find installation instructions in [INSTALL.md](INSTALL.md). 
+- Install GCC
+  ```bash
+  conda install -c conda-forge gcc
+  ```
+
+- Install UnRAR (e.g. from the [website](https://www.rarlab.com/rar_add.htm))
+
+- Clone this project and install it
+  ```bash
+  git clone https://github.com/LukasHedegaard/hags
+  cd hags
+  pip install -e .[dev]  
+  pip install -r requirements.txt
+  ```
+
+### Datasets
 You may follow the instructions in [DATASET.md](slowfast/datasets/DATASET.md) to prepare the datasets.
 
 
@@ -36,7 +51,7 @@ These were written and maintained by
 - [Christoph Feichtenhofer](https://feichtenhofer.github.io/)
 
 
-### Citation   
+## Citation   
 ```
 @article{tbd2020,
   title={TBD},
