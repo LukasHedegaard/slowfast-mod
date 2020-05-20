@@ -22,7 +22,7 @@ Research repository for stitching together visual glimpses and superpixels using
   ```
 
 ### Datasets
-You may follow the instructions in [DATASET.md](slowfast/datasets/DATASET.md) to prepare the datasets.
+You may follow the instructions [here](src/datasets/README.md) to prepare the datasets.
 
 
 ## Quick Start
