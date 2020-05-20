@@ -3,11 +3,11 @@
 from setuptools import find_packages, setup
 
 setup(
-    name="slowfast",
-    version="1.0",
-    author="Lukas Hedegaard & FAIR",
+    name="hags",
+    version="0.1",
+    author="Lukas Hedegaard",
     url="unknown",
-    description="SlowFast Video Understanding",
+    description="Human Action GCN Stitching",
     install_requires=[
         "yacs>=0.1.6",
         "pyyaml>=5.1",

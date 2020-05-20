@@ -1,40 +1,47 @@
-# PySlowFast
+# Human Action GCN Stitching
+[![Code style: black](https://img.shields.io/badge/code%20style-black-000000.svg)](https://github.com/psf/black)
 
-PySlowFast is an open source video understanding codebase from FAIR that provides state-of-the-art video classification models, including papers "[SlowFast Networks for Video Recognition](https://arxiv.org/abs/1812.03982)", and "[Non-local Neural Networks](https://arxiv.org/abs/1711.07971)". 
+## Description
+Research repository for stitching together visual glimpses and superpixels using Graph Convolutional Network (GCNs) for Human Action Recognition and Detection tasks.
 
-<div align="center">
-  <img src="demo/ava_demo.gif" width="600px"/>
-</div>
 
-## Introduction
+## Installation
+Please find installation instructions in [INSTALL.md](INSTALL.md). 
+You may follow the instructions in [DATASET.md](slowfast/datasets/DATASET.md) to prepare the datasets.
 
-The goal of PySlowFast is to provide a high-performance, light-weight pytorch codebase provides state-of-the-art video backbones for video understanding research on different tasks (classification, detection, and etc). It is designed in order to support rapid implementation and evaluation of novel video research ideas. PySlowFast includes implementations of the following backbone network architectures:
 
+## Quick Start
+See [GETTING_STARTED.md](GETTING_STARTED.md).
+
+
+## Main Contribution
+Coming up!
+
+Novel contributions were added by
+- [Lukas Hedegaard](https://www.linkedin.com/in/lukashedegaard/)
+
+
+## Baselines  
+Through the [PySlowFast](https://github.com/facebookresearch/SlowFast) repository, implementations of the following backbone network architectures were included:
 - SlowFast 
 - Slow
 - C2D
 - I3D
 - Non-local Network
 
-## Updates
+These were written and maintained by 
+- [Haoqi Fan](https://haoqifan.github.io/)
+- [Yanghao Li](https://lyttonhao.github.io/)
+- [Wan-Yen Lo](https://www.linkedin.com/in/wanyenlo/)
+- [Christoph Feichtenhofer](https://feichtenhofer.github.io/)
 
-PySlowFast is released in conjunction with our [ICCV 2019 Tutorial](https://alexander-kirillov.github.io/tutorials/visual-recognition-iccv19/).
 
-## License
-
-PySlowFast is released under the [Apache 2.0 license](LICENSE). 
-
-## Model Zoo and Baselines
-
-We provide a large set of baseline results and trained models available for download in the PySlowFast [Model Zoo](MODEL_ZOO.md).
-
-## Installation
-
-Please find installation instructions for PyTorch and PySlowFast in [INSTALL.md](INSTALL.md). You may follow the instructions in [DATASET.md](slowfast/datasets/DATASET.md) to prepare the datasets.
-
-## Quick Start
-
-Follow the example in [GETTING_STARTED.md](GETTING_STARTED.md) to start playing video models with PySlowFast.
-
-## Contributors
-PySlowFast is written and maintained by [Haoqi Fan](https://haoqifan.github.io/), [Yanghao Li](https://lyttonhao.github.io/), [Wan-Yen Lo](https://www.linkedin.com/in/wanyenlo/), [Christoph Feichtenhofer](https://feichtenhofer.github.io/).
+### Citation   
+```
+@article{tbd2020,
+  title={TBD},
+  author={Lukas Hedegaard},
+  journal={TBD},
+  year={2020}
+}
+```   
