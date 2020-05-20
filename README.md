@@ -37,18 +37,12 @@ Novel contributions were added by
 
 
 ## Baselines  
-Through the [PySlowFast](https://github.com/facebookresearch/SlowFast) repository, implementations of the following backbone network architectures were included:
+Thanks to [Haoqi Fan](https://haoqifan.github.io/), [Yanghao Li](https://lyttonhao.github.io/), [Wan-Yen Lo](https://www.linkedin.com/in/wanyenlo/), [Christoph Feichtenhofer](https://feichtenhofer.github.io/), who wrote and maintain [PySlowFast](https://github.com/facebookresearch/SlowFast), implementations of the following backbone network architectures are included:
 - SlowFast 
 - Slow
 - C2D
 - I3D
 - Non-local Network
-
-These were written and maintained by 
-- [Haoqi Fan](https://haoqifan.github.io/)
-- [Yanghao Li](https://lyttonhao.github.io/)
-- [Wan-Yen Lo](https://www.linkedin.com/in/wanyenlo/)
-- [Christoph Feichtenhofer](https://feichtenhofer.github.io/)
 
 
 ## Citation   
