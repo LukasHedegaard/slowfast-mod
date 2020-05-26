@@ -5,7 +5,7 @@
 
 import torch
 
-import slowfast.utils.lr_policy as lr_policy
+import src.utils.lr_policy as lr_policy
 
 
 def construct_optimizer(model, cfg):

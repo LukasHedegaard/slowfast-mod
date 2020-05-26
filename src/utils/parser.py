@@ -6,8 +6,8 @@
 import argparse
 import sys
 
-import slowfast.utils.checkpoint as cu
-from slowfast.config.defaults import get_cfg
+import src.utils.checkpoint as cu
+from src.config.defaults import get_cfg
 
 
 def parse_args():

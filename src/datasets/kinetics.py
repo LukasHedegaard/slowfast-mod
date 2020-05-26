@@ -7,7 +7,7 @@ import torch
 import torch.utils.data
 from fvcore.common.file_io import PathManager
 
-import slowfast.utils.logging as logging
+import src.utils.logging as logging
 
 from . import decoder as decoder
 from . import utils as utils

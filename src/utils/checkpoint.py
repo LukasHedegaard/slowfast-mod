@@ -9,9 +9,9 @@ from collections import OrderedDict
 import torch
 from fvcore.common.file_io import PathManager
 
-import slowfast.utils.distributed as du
-import slowfast.utils.logging as logging
-from slowfast.utils.c2_model_loading import get_name_convert_func
+import src.utils.distributed as du
+import src.utils.logging as logging
+from src.utils.c2_model_loading import get_name_convert_func
 
 logger = logging.get_logger(__name__)
 

@@ -6,8 +6,8 @@
 import torch
 import torch.nn as nn
 
-import slowfast.utils.weight_init_helper as init_helper
-from slowfast.models.batchnorm_helper import get_norm
+import src.utils.weight_init_helper as init_helper
+from src.models.batchnorm_helper import get_norm
 
 from . import head_helper, resnet_helper, stem_helper
 from .build import MODEL_REGISTRY

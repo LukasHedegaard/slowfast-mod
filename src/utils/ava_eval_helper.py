@@ -32,7 +32,7 @@ import time
 from collections import defaultdict
 from fvcore.common.file_io import PathManager
 
-from slowfast.utils.ava_evaluation import object_detection_evaluation, standard_fields
+from src.utils.ava_evaluation import object_detection_evaluation, standard_fields
 
 logger = logging.getLogger(__name__)
 

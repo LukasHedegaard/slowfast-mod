@@ -9,10 +9,10 @@ import torch
 import tqdm
 from fvcore.common.timer import Timer
 
-import slowfast.utils.logging as logging
-import slowfast.utils.misc as misc
-from slowfast.datasets import loader
-from slowfast.utils.env import setup_environment
+import src.utils.logging as logging
+import src.utils.misc as misc
+from src.datasets import loader
+from src.utils.env import setup_environment
 
 logger = logging.get_logger(__name__)
 

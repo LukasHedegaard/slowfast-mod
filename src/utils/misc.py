@@ -11,9 +11,9 @@ from fvcore.nn.flop_count import flop_count
 from matplotlib import pyplot as plt
 from torch import nn
 
-import slowfast.utils.logging as logging
-from slowfast.datasets.utils import pack_pathway_output
-from slowfast.models.batchnorm_helper import SubBatchNorm3d
+import src.utils.logging as logging
+from src.datasets.utils import pack_pathway_output
+from src.models.batchnorm_helper import SubBatchNorm3d
 
 logger = logging.get_logger(__name__)
 
