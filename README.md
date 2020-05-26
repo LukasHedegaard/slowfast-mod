@@ -1,4 +1,4 @@
-# HAGS 🧙‍♀️🧙🏻‍♀️🧙🏾‍♀️ Human Action GCN Stitching
+# Human Action Recognition Research Repo
 [![Code style: black](https://img.shields.io/badge/code%20style-black-000000.svg)](https://github.com/psf/black)
 
 ## Description
