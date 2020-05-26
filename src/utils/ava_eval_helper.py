@@ -62,9 +62,9 @@ def read_csv(csv_file, class_whitelist=None, load_score=False):
     labels = defaultdict(list)
     scores = defaultdict(list)
     with PathManager.open(csv_file, "r") as f:
-        reader = csv.reader(f)
+        reader = csv.reader(f)  # type: ignore
         for row in reader:
-            assert len(row) in [7, 8], "Wrong number of columns: " + row
+            assert len(row) in [7, 8], "Wrong number of columns: {}".format(row)
             image_key = make_image_key(row[0], row[1])
             x1, y1, x2, y2 = [float(n) for n in row[2:6]]
             action_id = int(row[6])
@@ -90,9 +90,9 @@ def read_exclusions(exclusions_file):
     excluded = set()
     if exclusions_file:
         with PathManager.open(exclusions_file, "r") as f:
-            reader = csv.reader(f)
+            reader = csv.reader(f)  # type: ignore
             for row in reader:
-                assert len(row) == 2, "Expected only 2 columns, got: " + row
+                assert len(row) == 2, "Expected only 2 columns, got: {}".format(row)
                 excluded.add(make_image_key(row[0], row[1]))
     return excluded
 
@@ -106,10 +106,10 @@ def read_labelmap(labelmap_file):
     class_id = ""
     with PathManager.open(labelmap_file, "r") as f:
         for line in f:
-            if line.startswith("  name:"):
-                name = line.split('"')[1]
-            elif line.startswith("  id:") or line.startswith("  label_id:"):
-                class_id = int(line.strip().split(" ")[-1])
+            if line.startswith("  name:"):  # type: ignore
+                name = line.split('"')[1]  # type: ignore
+            elif line.startswith("  id:") or line.startswith("  label_id:"):  # type: ignore
+                class_id = int(line.strip().split(" ")[-1])  # type: ignore
                 labelmap.append({"id": class_id, "name": name})
                 class_ids.add(class_id)
     return labelmap, class_ids
@@ -272,7 +272,7 @@ def write_results(detections, filename):
         for key in boxes.keys():
             for box, label, score in zip(boxes[key], labels[key], scores[key]):
                 f.write(
-                    "%s,%.03f,%.03f,%.03f,%.03f,%d,%.04f\n"
+                    "%s,%.03f,%.03f,%.03f,%.03f,%d,%.04f\n"  # type: ignore
                     % (key, box[1], box[0], box[3], box[2], label, score)
                 )
 

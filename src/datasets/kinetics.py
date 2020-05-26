@@ -89,7 +89,7 @@ class Kinetics(torch.utils.data.Dataset):
                 path, label = path_label.split()
                 for idx in range(self._num_clips):
                     self._path_to_videos.append(
-                        os.path.join(self.cfg.DATA.PATH_PREFIX, path)
+                        os.path.join(self.cfg.DATA.PATH_PREFIX, path)  # type: ignore
                     )
                     self._labels.append(int(label))
                     self._spatial_temporal_idx.append(idx)
@@ -97,7 +97,7 @@ class Kinetics(torch.utils.data.Dataset):
         assert (
             len(self._path_to_videos) > 0
         ), "Failed to load Kinetics split {} from {}".format(
-            self._split_idx, path_to_file
+            self._split_idx, path_to_file  # type: ignore
         )
         logger.info(
             "Constructing kinetics dataloader (size: {}) from {}".format(

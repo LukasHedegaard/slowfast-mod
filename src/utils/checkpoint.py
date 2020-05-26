@@ -178,7 +178,7 @@ def load_checkpoint(
     ms = model.module if data_parallel else model
     if convert_from_caffe2:
         with PathManager.open(path_to_checkpoint, "rb") as f:
-            caffe2_checkpoint = pickle.load(f, encoding="latin1")
+            caffe2_checkpoint = pickle.load(f, encoding="latin1")  # type: ignore
         state_dict = OrderedDict()
         name_convert_func = get_name_convert_func()
         for key in caffe2_checkpoint["blobs"].keys():

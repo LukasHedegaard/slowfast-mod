@@ -109,9 +109,9 @@ class FuseFastToSlow(nn.Module):
         self.conv_f2s = nn.Conv3d(
             dim_in,
             dim_in * fusion_conv_channel_ratio,
-            kernel_size=[fusion_kernel, 1, 1],
-            stride=[alpha, 1, 1],
-            padding=[fusion_kernel // 2, 0, 0],
+            kernel_size=(fusion_kernel, 1, 1),
+            stride=(alpha, 1, 1),
+            padding=(fusion_kernel // 2, 0, 0),
             bias=False,
         )
         self.bn = norm_module(
@@ -147,7 +147,7 @@ class SlowFast(nn.Module):
             cfg (CfgNode): model building configs, details are in the
                 comments of the config file.
         """
-        super(SlowFast, self).__init__()
+        super(SlowFast, self).__init__()  # type: ignore
         self.norm_module = get_norm(cfg)
         self.enable_detection = cfg.DETECTION.ENABLE
         self.num_pathways = 2
@@ -230,9 +230,9 @@ class SlowFast(nn.Module):
 
         for pathway in range(self.num_pathways):
             pool = nn.MaxPool3d(
-                kernel_size=pool_size[pathway],
-                stride=pool_size[pathway],
-                padding=[0, 0, 0],
+                kernel_size=tuple(pool_size[pathway]),
+                stride=tuple(pool_size[pathway]),
+                padding=(0, 0, 0),
             )
             self.add_module("pathway{}_pool".format(pathway), pool)
 
@@ -410,7 +410,7 @@ class ResNet(nn.Module):
             cfg (CfgNode): model building configs, details are in the
                 comments of the config file.
         """
-        super(ResNet, self).__init__()
+        super(ResNet, self).__init__()  # type: ignore
         self.norm_module = get_norm(cfg)
         self.enable_detection = cfg.DETECTION.ENABLE
         self.num_pathways = 1
@@ -471,9 +471,9 @@ class ResNet(nn.Module):
 
         for pathway in range(self.num_pathways):
             pool = nn.MaxPool3d(
-                kernel_size=pool_size[pathway],
-                stride=pool_size[pathway],
-                padding=[0, 0, 0],
+                kernel_size=tuple(pool_size[pathway]),
+                stride=tuple(pool_size[pathway]),
+                padding=(0, 0, 0),
             )
             self.add_module("pathway{}_pool".format(pathway), pool)
 

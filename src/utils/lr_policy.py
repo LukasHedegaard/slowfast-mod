@@ -68,7 +68,7 @@ def get_step_index(cfg, cur_epoch):
     for ind, step in enumerate(steps):  # NoQA
         if cur_epoch < step:
             break
-    return ind - 1
+    return ind - 1  # type: ignore
 
 
 def get_lr_func(lr_policy):

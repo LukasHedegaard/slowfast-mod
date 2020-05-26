@@ -28,7 +28,7 @@ def benchmark_data_loading(cfg):
     # Set up environment.
     setup_environment()
     # Set random seed from configs.
-    np.random.seed(cfg.RNG_SEED)
+    np.random.seed(cfg.RNG_SEED)  # type: ignore
     torch.manual_seed(cfg.RNG_SEED)
 
     # Setup logging format.

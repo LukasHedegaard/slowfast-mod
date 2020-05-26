@@ -73,9 +73,9 @@ class BasicTransform(nn.Module):
         self.a = nn.Conv3d(
             dim_in,
             dim_out,
-            kernel_size=[self.temp_kernel_size, 3, 3],
-            stride=[1, stride, stride],
-            padding=[int(self.temp_kernel_size // 2), 1, 1],
+            kernel_size=(self.temp_kernel_size, 3, 3),
+            stride=(1, stride, stride),
+            padding=(int(self.temp_kernel_size // 2), 1, 1),
             bias=False,
         )
         self.a_bn = norm_module(
@@ -86,9 +86,9 @@ class BasicTransform(nn.Module):
         self.b = nn.Conv3d(
             dim_out,
             dim_out,
-            kernel_size=[1, 3, 3],
-            stride=[1, 1, 1],
-            padding=[0, 1, 1],
+            kernel_size=(1, 3, 3),
+            stride=(1, 1, 1),
+            padding=(0, 1, 1),
             bias=False,
         )
         self.b_bn = norm_module(
@@ -169,9 +169,9 @@ class BottleneckTransform(nn.Module):
         self.a = nn.Conv3d(
             dim_in,
             dim_inner,
-            kernel_size=[self.temp_kernel_size, 1, 1],
-            stride=[1, str1x1, str1x1],
-            padding=[int(self.temp_kernel_size // 2), 0, 0],
+            kernel_size=(self.temp_kernel_size, 1, 1),
+            stride=(1, str1x1, str1x1),
+            padding=(int(self.temp_kernel_size // 2), 0, 0),
             bias=False,
         )
         self.a_bn = norm_module(
@@ -183,12 +183,12 @@ class BottleneckTransform(nn.Module):
         self.b = nn.Conv3d(
             dim_inner,
             dim_inner,
-            [1, 3, 3],
-            stride=[1, str3x3, str3x3],
-            padding=[0, dilation, dilation],
+            (1, 3, 3),
+            stride=(1, str3x3, str3x3),
+            padding=(0, dilation, dilation),
             groups=num_groups,
             bias=False,
-            dilation=[1, dilation, dilation],
+            dilation=(1, dilation, dilation),
         )
         self.b_bn = norm_module(
             num_features=dim_inner, eps=self._eps, momentum=self._bn_mmt
@@ -199,9 +199,9 @@ class BottleneckTransform(nn.Module):
         self.c = nn.Conv3d(
             dim_inner,
             dim_out,
-            kernel_size=[1, 1, 1],
-            stride=[1, 1, 1],
-            padding=[0, 0, 0],
+            kernel_size=(1, 1, 1),
+            stride=(1, 1, 1),
+            padding=(0, 0, 0),
             bias=False,
         )
         self.c_bn = norm_module(
@@ -314,7 +314,7 @@ class ResBlock(nn.Module):
                 dim_in,
                 dim_out,
                 kernel_size=1,
-                stride=[1, stride, stride],
+                stride=(1, stride, stride),
                 padding=0,
                 bias=False,
                 dilation=1,

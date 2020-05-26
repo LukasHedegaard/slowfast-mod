@@ -287,14 +287,14 @@ class TestMeter(object):
             vid_id = int(clip_ids[ind]) // self.num_clips
             if self.video_labels[vid_id].sum() > 0:
                 assert torch.equal(
-                    self.video_labels[vid_id].type(torch.FloatTensor),
-                    labels[ind].type(torch.FloatTensor),
+                    self.video_labels[vid_id].type(torch.FloatTensor),  # type: ignore
+                    labels[ind].type(torch.FloatTensor),  # type: ignore
                 )
             self.video_labels[vid_id] = labels[ind]
             if self.ensemble_method == "sum":
                 self.video_preds[vid_id] += preds[ind]
             elif self.ensemble_method == "max":
-                self.video_preds[vid_id] = torch.max(
+                self.video_preds[vid_id] = torch.max(  # type: ignore
                     self.video_preds[vid_id], preds[ind]
                 )
             else:
